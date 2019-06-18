@@ -77,6 +77,10 @@
             }else if($url1=="RT"){
               $this->load->view('helpdesk/menu/RT', '', false); 
             }
+            // TAMBAHAN BUAT TESTING
+            else{
+              $this->load->view('helpdesk/menu/TIK', '', FALSE);
+            }
             ?>
           </ul>
         </section>

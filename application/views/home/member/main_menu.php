@@ -10,56 +10,56 @@
 	</a>
 	<ul class="treeview-menu" style="display: none;">
 		<li <?php if(isset($aplikasi)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/app/add')?>'>
+			<a href='<?php echo site_url('member/crud/app')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Permintaan Akun Aplikasi</span>
 			</a>
 		</li>
 
 		<li <?php if(isset($m_prestasi)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/sf/add')?>'>
+			<a href='<?php echo site_url('member/crud/sf')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Sharing Folder</span>
 			</a>
 		</li>
 
 		<li <?php if(isset($m_cabor)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/akin/add')?>'>
+			<a href='<?php echo site_url('member/crud/akin')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Akun Individu</span>
 			</a>
 		</li>
 
 		<li <?php if(isset($m_turnamen)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/asus/add')?>'>
+			<a href='<?php echo site_url('member/crud/asus')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Akun Khusus</span>
 			</a>
 		</li>
 
 		<li <?php if(isset($m_turnamen)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/grup/add')?>'>
+			<a href='<?php echo site_url('member/crud/grup')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Grup</span>
 			</a>
 		</li>
 
 		<li <?php if(isset($m_turnamen)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/mail/add')?>'>
+			<a href='<?php echo site_url('member/crud/mail')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Kuota Mailbox</span>
 			</a>
 		</li>
 
 		<li <?php if(isset($m_turnamen)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/akun_domain/add')?>'>
+			<a href='<?php echo site_url('member/crud/akun_domain')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Penonaktifan Akun Domain</span>
 			</a>
 		</li>
 
 		<li <?php if(isset($m_turnamen)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/pendampingan/add')?>'>
+			<a href='<?php echo site_url('member/crud/pendampingan')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Pendampingan Video Konf.</span>
 			</a>
@@ -67,7 +67,7 @@
 
 		
 		<li <?php if(isset($m_turnamen)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/akun_video/add')?>'>
+			<a href='<?php echo site_url('member/crud/akun_video')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Permintaan Akun Video</span>
 			</a>
@@ -83,7 +83,7 @@
 	</a>
 	<ul class="treeview-menu" style="display: none;">
 		<li <?php if(isset($aplikasi)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/app/add')?>'>
+			<a href='<?php echo site_url('member/crud/app')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Penemukan Layanan RT</span>
 			</a>
@@ -92,7 +92,7 @@
 	
 	<ul class="treeview-menu" style="display: none;">
 		<li <?php if(isset($aplikasi)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/app/add')?>'>
+			<a href='<?php echo site_url('member/crud/app')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Pemberdayaan BMN</span>
 			</a>
@@ -106,7 +106,7 @@
 	</a>
 	<ul class="treeview-menu" style="display: none;">
 		<li <?php if(isset($aplikasi)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('member/crud/app/add')?>'>
+			<a href='<?php echo site_url('member/crud/app')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Dukungan keg. Kemenkeu</span>
 			</a>
