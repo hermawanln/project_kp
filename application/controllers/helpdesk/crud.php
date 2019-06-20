@@ -111,90 +111,96 @@ class Crud extends CI_Controller {
 
 
      public function sf() {
-            $crud = new grocery_CRUD();
-			$crud->set_table('sharing');
-            $crud->set_subject('Sharing Folder');
-            $crud->columns('kode_sh', 'is_confirm', 'nama', 'nip', 'pangkat', 'jabatan', 'unker',
-                            'telp', 'hp', 'nama_file', 'platform', 'media',
-                            'server', 'nm_user', 'akses', 'dibuat', 'kepala',
-                            'nm_kepala', 'nip_kpl', 'nomor', 'cetak', 'oleh',
-                            'hal', 'tiket', 'petugas', 'nip');
-            $crud->display_as('kode_sh','ID');
-            $crud->display_as('nama_file','Nama Folder');
-            $crud->display_as('nm_user','Nama User');
-            $crud->display_as('jbtn','Jabatan');
-            $crud->display_as('unker','Unit Kerja');
-            $crud->display_as('akses','Hak Akses');
-            $crud->display_as('nm_kepala','Nama Kepala');
-            $crud->display_as('nip_kpl','NIP Kepala');
-            $crud->display_as('is_confirm','Status');
+        $crud = new grocery_CRUD();
+        $crud->set_table('sharing');
+        $crud->set_subject('Sharing Folder');
+        $crud->columns('kode_sh', 'is_confirm', 'nama', 'nip', 'pangkat', 'jabatan', 'unker',
+                        'telp', 'hp', 'nama_file', 'platform', 'media',
+                        'server', 'nm_user', 'akses', 'dibuat', 'kepala',
+                        'nm_kepala', 'nip_kpl', 'nomor', 'cetak', 'oleh',
+                        'hal', 'tiket', 'petugas', 'nip');
+        $crud->display_as('kode_sh','ID');
+        $crud->display_as('nama_file','Nama Folder');
+        $crud->display_as('nm_user','Nama User');
+        $crud->display_as('jbtn','Jabatan');
+        $crud->display_as('unker','Unit Kerja');
+        $crud->display_as('akses','Hak Akses');
+        $crud->display_as('nm_kepala','Nama Kepala');
+        $crud->display_as('nip_kpl','NIP Kepala');
+        $crud->display_as('is_confirm','Status');
 
-            
-            //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
-            $crud->callback_add_field('platform', function() {
-                return '<input type="radio" name="platform" value="Windows" /> Windows  &nbsp;
-                            <input type="radio" name="platform" value="Linux" /> Linux &nbsp; <input type="radio" name="platform" value="lainnya" /> lainnya'; 
-            });
-            $crud->callback_edit_field('platform', function($value) {
-                return '<input type="radio" name="platform" value="Windows" '.($value == 'Windows' ? 'checked' : '').'/> Windows  &nbsp;
-                        <input type="radio" name="platform" value="Linux" '.($value == 'Linux' ? 'checked' : '').'/> Linux &nbsp; 
-                        <input type="radio" name="platform" value="lainnya" '.($value == 'lainnya' ? 'checked' : '').'/> lainnya'; 
-            });
-            
-            // $crud->unset_fields('cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm');
-            // $crud->unset_columns(array('cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
-            
-          
-            $crud->unset_add()->unset_print()->unset_export();
-            $output = $crud->render();
-			$this->view_crud($output);
+        
+        //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
+        $crud->callback_add_field('platform', function() {
+            return '<input type="radio" name="platform" value="Windows" /> Windows  &nbsp;
+                        <input type="radio" name="platform" value="Linux" /> Linux &nbsp; <input type="radio" name="platform" value="lainnya" /> lainnya'; 
+        });
+        $crud->callback_edit_field('platform', function($value) {
+            return '<input type="radio" name="platform" value="Windows" '.($value == 'Windows' ? 'checked' : '').'/> Windows  &nbsp;
+                    <input type="radio" name="platform" value="Linux" '.($value == 'Linux' ? 'checked' : '').'/> Linux &nbsp; 
+                    <input type="radio" name="platform" value="lainnya" '.($value == 'lainnya' ? 'checked' : '').'/> lainnya'; 
+        });
+        
+        // $crud->unset_fields('cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm');
+        // $crud->unset_columns(array('cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
+        
+        
+        $crud->unset_add()->unset_print()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
 
      }
     
     
      public function akin() {
-             $crud = new grocery_CRUD();
-			$crud->set_table('akunindividu');
-            $crud->set_subject('Akun Individu');
-            
-              $crud->display_as('jenkel','Jenis Kelamin');
-              $crud->display_as('status','Status Pegawai');
-               $crud->display_as('masa_laku','Berlaku s.d');
-               $crud->display_as('nip','NIP');
-               $crud->display_as('nama_akun','Nama Usulan Akun');
-               $crud->display_as('jabatan','Jabatan/Golongan');
-               $crud->display_as('unit_kerja','Unit Kerja');
-            $crud->display_as('layanan','Jenis Layanan');
+        $crud = new grocery_CRUD();
+        $crud->set_table('akunindividu');
+        $crud->set_subject('Akun Individu');
+        $crud->columns('kode_akun', 'is_confirm', 'nama', 'ttl', 'jenkel', 'status',
+                        'masa_laku', 'nip', 'pangkat', 'jabatan', 'unit_kerja',
+                        'alamat', 'telp', 'hp', 'nama_akun', 'layanan',
+                        'lokasi', 'kepala', 'eslon', 'nip_eslon', 'tiket',
+                        'dibuat', 'petugas');    
+        $crud->display_as('kode_akun','ID');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('jenkel','Jenis Kelamin');
+        $crud->display_as('status','Status Pegawai');
+        $crud->display_as('masa_laku','Berlaku s.d');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('nama_akun','Nama Usulan Akun');
+        $crud->display_as('jabatan','Jabatan/Golongan');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('layanan','Jenis Layanan');
 
             
-            //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
-                $crud->callback_add_field('jenkel', function() {
-                    return '<input type="radio" name="jenkel" value="Laki - Laki" /> Laki - Laki  &nbsp;
-                                <input type="radio" name="jenkel" value="Perempuan" /> Perempuan '; 
-                });
-                $crud->callback_edit_field('jenkel', function() {
-                    return '<input type="radio" name="jenkel" value="Laki - Laki" /> Laki - Laki  &nbsp;
-                                <input type="radio" name="jenkel" value="Perempuan" /> Perempuan '; 
-                });
+        //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
+        $crud->callback_add_field('jenkel', function() {
+            return '<input type="radio" name="jenkel" value="Laki - Laki" /> Laki - Laki  &nbsp;
+                        <input type="radio" name="jenkel" value="Perempuan" /> Perempuan '; 
+        });
+        $crud->callback_edit_field('jenkel', function($value) {
+            return '<input type="radio" name="jenkel" value="Laki - Laki" '.($value == 'Laki - Laki' ? 'checked' : '').'/> Laki - Laki  &nbsp;
+                        <input type="radio" name="jenkel" value="Perempuan" '.($value == 'Perempuan' ? 'checked' : '').'/> Perempuan '; 
+        });
 
-                $crud->callback_add_field('status', function() {
-                    return '<input type="radio" name="status" value="Pegawai" /> Pegawai  &nbsp;
-                                <input type="radio" name="status" value="Lainnya" /> Lainnya '; 
-                });
-                $crud->callback_edit_field('status', function() {
-                    return '<input type="radio" name="status" value="Pegawai" /> Pegawai  &nbsp;
-                                <input type="radio" name="status" value="Lainnya" /> Lainnya '; 
-                });
+        $crud->callback_add_field('status', function() {
+            return '<input type="radio" name="status" value="Pegawai" /> Pegawai  &nbsp;
+                        <input type="radio" name="status" value="Lainnya" /> Lainnya '; 
+        });
+        $crud->callback_edit_field('status', function($value) {
+            return '<input type="radio" name="status" value="Pegawai" '.($value == 'Pegawai' ? 'checked' : '').'/> Pegawai  &nbsp;
+                        <input type="radio" name="status" value="Lainnya" '.($value == 'Lainnya' ? 'checked' : '').'/> Lainnya '; 
+        });
         $crud->field_type('layanan','multiselect',array('Surat Elektronik' => 'Surat Elektronik', 'Internet' => 'Internet'));
          
             
-            $crud->unset_fields('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas','is_confirm');
-            $crud->unset_columns(array('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','is_confirm','kepala','hal','petugas','is_confirm'));
+        // $crud->unset_fields('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas','is_confirm');
+        // $crud->unset_columns(array('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','is_confirm','kepala','hal','petugas','is_confirm'));
             
           
-           $crud->unset_print()->unset_export();
-            $output = $crud->render();
-			$this->view_crud($output);
+        $crud->unset_add()->unset_print()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
 
      }
 
