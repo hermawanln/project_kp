@@ -103,7 +103,7 @@ class Crud extends CI_Controller {
         });
             
           
-        $crud->unset_add()->unset_print()->unset_export();
+        $crud->unset_add()->unset_export();
         $output = $crud->render();
 		$this->view_crud($output);
                  
@@ -204,6 +204,64 @@ class Crud extends CI_Controller {
 
      }
 
+     public function asus() {
+        $crud = new grocery_CRUD();
+        $crud->set_table('akunkhusus');
+        $crud->set_subject('Akun Khusus');
+        $crud->columns('kode_khusu', 'is_confirm', 'usulan_akun', 'layanan', 'masa',
+                        'nama', 'nip', 'jabatan', 'unit_kerja', 'alamat',
+                        'telp', 'hp', 'surat_elk', 'keterangan', 'lokasi',
+                        'pemohon', 'nip_pmhn', 'kepala', 'nm_kpl', 'nip_kpl',
+                        'tiket', 'dibuat', 'petugas');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('jenkel','Jenis Kelamin');
+        $crud->display_as('surat_elk','Alamat Surat Elektronik');
+        $crud->display_as('masa','Berlaku s.d');
+        $crud->display_as('nip_pmhn','NIP Pemohon');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('usulan_akun','Nama Usulan Akun');
+        $crud->display_as('jabatan','Jabatan/Golongan');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('alamat','Alamat Kantor');
+        $crud->display_as('layanan','Jenis Layanan');
+        $crud->display_as('nm_kpl','Nama Kepala');
+        $crud->display_as('nip_kpl','NIP Kepala');
+
+        $crud->callback_field('nama', function($value) {
+            return 'Penanggung Jawab Struktural<br><input type="text" name="nama" value="'.$value.'" /> '; 
+        });
+
+      
+        $crud->callback_read_field('nama', function ($value, $primary_key) {
+            return 'Penanggung Jawab Struktural<br> '.$value ; 
+        });
+        $crud->callback_add_field('usulan_akun', function() {
+            return '<input type="text" minlength="6" maxlength="20" name="usulan_akun" placeholder="6 s.d. 20 karakter">'; 
+        });
+        $crud->callback_edit_field('usulan_akun', function($value) {
+            return '<input type="text" minlength="6" maxlength="20" name="usulan_akun" value="'.$value.'" placeholder="6 s.d. 20 karakter">'; 
+        });
+             
+
+        $crud->callback_add_field('layanan', function() {
+            return '<input type="radio" name="layanan" value="Surat Elektronik" /> Surat Elektronik  &nbsp;
+                        <input type="radio" name="layanan" value="Internet" /> Internet '; 
+        });
+
+        $crud->callback_edit_field('layanan', function($value) {
+            return '<input type="radio" name="layanan" value="Surat Elektronik" '.($value == 'Surat Elektronik' ? 'checked' : '').' /> Surat Elektronik  &nbsp;
+                        <input type="radio" name="layanan" value="Internet" '.($value == 'Internet' ? 'checked' : '').'/> Internet '; 
+        });
+            
+        // $crud->unset_fields('nip_eslon','eslon','pemohon','nip_pmhn','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm');
+        // $crud->unset_columns(array('nip_eslon','pemohon','nip_pmhn','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
+            
+          
+        $crud->unset_add()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
+
+     }
 
      public function mail() {
              $crud = new grocery_CRUD();
@@ -238,58 +296,7 @@ class Crud extends CI_Controller {
 
      }
 
-          public function asus() {
-             $crud = new grocery_CRUD();
-			$crud->set_table('akunkhusus');
-            $crud->set_subject('Akun Khusus');
-            
-              $crud->display_as('jenkel','Jenis Kelamin');
-              $crud->display_as('surat_elk','Alamat Surat Elektronik');
-               $crud->display_as('masa','Berlaku s.d');
-               $crud->display_as('nip_pmhn','NIP Pemohon');
-               $crud->display_as('nip','NIP');
-               $crud->display_as('usulan_akun','Nama Usulan Akun');
-               $crud->display_as('jabatan','Jabatan/Golongan');
-               $crud->display_as('unit_kerja','Unit Kerja');
-            $crud->display_as('layanan','Jenis Layanan');
-
-            
-            //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
-            $crud->callback_field('nama', function() {
-       return 'Penanggung Jawab Struktural<br><input type="text" name="nama" /> '; 
-        });
-
-      
-        $crud->callback_read_field('nama', function ($value, $primary_key) {
-       return 'Penanggung Jawab Struktural<br> '.$value ; 
-        });
-            $crud->callback_add_field('usulan_akun', function() {
-                return '<input type="text" minlength="6" maxlength="20" name="usulan_akun" placeholder="6 s.d. 20 karakter">'; 
-            });
-            $crud->callback_edit_field('usulan_akun', function() {
-                return '<input type="text" minlength="6" maxlength="20" name="usulan_akun" placeholder="6 s.d. 20 karakter">'; 
-            });
-             
-
-            $crud->callback_add_field('layanan', function() {
-                return '<input type="radio" name="layanan" value="Surat Elektronik" /> Surat Elektronik  &nbsp;
-                            <input type="radio" name="layanan" value="Internet" /> Internet '; 
-            });
-
-            $crud->callback_edit_field('layanan', function() {
-                return '<input type="radio" name="layanan" value="Surat Elektronik" /> Surat Elektronik  &nbsp;
-                            <input type="radio" name="layanan" value="Internet" /> Internet '; 
-            });
-            
-            $crud->unset_fields('nip_eslon','eslon','pemohon','nip_pmhn','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm');
-            $crud->unset_columns(array('nip_eslon','pemohon','nip_pmhn','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
-            
-          
-           $crud->unset_print()->unset_export();
-            $output = $crud->render();
-			$this->view_crud($output);
-
-          }
+     
     
     
      public function akun_domain() {
