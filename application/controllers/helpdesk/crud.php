@@ -226,14 +226,14 @@ class Crud extends CI_Controller {
         $crud->display_as('layanan','Jenis Layanan');
         $crud->display_as('nm_kpl','Nama Kepala');
         $crud->display_as('nip_kpl','NIP Kepala');
-
+        
         $crud->callback_field('nama', function($value) {
-            return 'Penanggung Jawab Struktural<br><input type="text" name="nama" value="'.$value.'" /> '; 
+            return '<b>Penanggung Jawab Struktural</b><br><input type="text" name="nama" value="'.$value.'" /> '; 
         });
 
       
         $crud->callback_read_field('nama', function ($value, $primary_key) {
-            return 'Penanggung Jawab Struktural<br> '.$value ; 
+            return '<b>Penanggung Jawab Struktural</b><br> '.$value ; 
         });
         $crud->callback_add_field('usulan_akun', function() {
             return '<input type="text" minlength="6" maxlength="20" name="usulan_akun" placeholder="6 s.d. 20 karakter">'; 
@@ -257,6 +257,58 @@ class Crud extends CI_Controller {
         // $crud->unset_columns(array('nip_eslon','pemohon','nip_pmhn','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
             
           
+        $crud->unset_add()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
+
+     }
+
+     public function grup() {
+        $crud = new grocery_CRUD();
+        $crud->set_table('permintaangrup');
+        $crud->set_subject('Permintaan Akun Video Conference');
+        $crud->columns('kode_grup', 'is_confirm', 'usulan', 'berlaku', 'nama',
+                        'nip', 'jabatan', 'unit_kerja', 'alamat', 'telp',
+                        'hp', 'surat_elektronik', 'nm_agt', 'nip_agt', 'akun',
+                        'keterangan', 'lokasi', 'kepala', 'eslon', 'nip_eslon',
+                        'pemohon', 'nip_pmhn', 'tiket', 'cetak');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('usulan','Usulan nama grup');
+        $crud->display_as('surat_elektronik','Alamat Surat Elektronik');
+        $crud->display_as('berlaku','Berlaku s.d');
+        $crud->display_as('alamat','Alamat Kantor');
+        $crud->display_as('nip_pmhn','NIP Pemohon');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('nama_akun','Nama Usulan Akun');
+        $crud->display_as('jabatan','Jabatan/Golongan');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('nm_agt','Nama Anggota');
+        $crud->display_as('nip_agt','NIP Anggota');
+        $crud->display_as('akun','[Akun]@kemenkeu.go.id');
+
+        
+        //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
+        
+        
+        
+        // $crud->unset_fields('tanggal','ptgs','nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas');
+        // $crud->unset_columns(array('tanggal','ptgs','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','is_confirm','hal','petugas'));
+        
+        $crud->callback_field('nama', function($value) {
+            return '<b>Penanggung Jawab Struktural</b><br><input type="text" name="nama" value="'.$value.'" /> '; 
+        });
+
+      
+        $crud->callback_read_field('nama', function ($value, $primary_key) {
+            return '<b>Penanggung Jawab Struktural</b><br> '.$value ; 
+        });
+
+        $crud->callback_add_field('nama_akun', function() {
+            return '<input type="text" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter">'; 
+        });
+        $crud->callback_edit_field('nama_akun', function() {
+            return '<input type="text" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter">'; 
+        });
         $crud->unset_add()->unset_export();
         $output = $crud->render();
         $this->view_crud($output);
@@ -430,40 +482,5 @@ class Crud extends CI_Controller {
 			$this->view_crud($output);
 
           }
-
-           public function grup() {
-                $crud = new grocery_CRUD();
-                $crud->set_table('permintaangrup');
-                $crud->set_subject('Permintaan Akun Video Conference');
-                
-                $crud->display_as('jenkel','Jenis Kelamin');
-                $crud->display_as('surat_elk','Alamat Surat Elektronik');
-                $crud->display_as('masa','Berlaku s.d');
-                $crud->display_as('nip_pmhn','NIP Pemohon');
-                $crud->display_as('nip','NIP');
-                $crud->display_as('nama_akun','Nama Usulan Akun');
-                $crud->display_as('jabatan','Jabatan/Golongan');
-                $crud->display_as('unit_kerja','Unit Kerja');
-                $crud->display_as('layanan','Jenis Layanan');
-
-                
-                //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
-                
-                
-                
-                $crud->unset_fields('tanggal','ptgs','nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas');
-                $crud->unset_columns(array('tanggal','ptgs','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','is_confirm','hal','petugas'));
-                
-                $crud->callback_add_field('nama_akun', function() {
-                    return '<input type="text" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter">'; 
-                });
-                $crud->callback_edit_field('nama_akun', function() {
-                    return '<input type="text" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter">'; 
-                });
-            $crud->unset_print()->unset_export();
-                $output = $crud->render();
-                $this->view_crud($output);
-
-            }
     
 }
