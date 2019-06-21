@@ -273,36 +273,43 @@ class Crud extends CI_Controller {
         $output = $crud->render();
         $this->view_crud($output);
 
-    }
-
+     }
 
      public function mail() {
-             $crud = new grocery_CRUD();
-			$crud->set_table('kouta_mail');
-            $crud->set_subject('Kuota Mail');
-            
-              $crud->display_as('jenkel','Jenis Kelamin');
-              $crud->display_as('nip_pmhn','NIP Pemohon');
-               $crud->display_as('nip','NIP');
-               $crud->display_as('usulan_akun','Nama Usulan Akun');
-               $crud->display_as('jabatan','Jabatan/Golongan');
-               $crud->display_as('unit_kerja','Unit Kerja');
-            $crud->display_as('kapasitas','Kuota Area');
+        $crud = new grocery_CRUD();
+        $crud->set_table('kouta_mail');
+        $crud->set_subject('Kuota Mail');
+        $crud->fields('nama', 'nip', 'pangkat',
+                        'jabatan', 'unit_kerja', 'telp', 'hp', 'alasan',
+                        'kapasitas');   
+        $crud->display_as('kode_km','ID');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('alasan','Alasan Penambahan');
+        $crud->display_as('jabatan','Jabatan/Golongan');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('kapasitas','Kuota Area');
+        $crud->display_as('nama_kpl','Nama Kepala');
+        $crud->display_as('nip_kpl','NIP Kepala');
 
             
-            //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
+        //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
          
-                $crud->callback_add_field('kapasitas', function() {
-       return '<input type="text" name="kapasitas" /> MB'; 
+        $crud->callback_add_field('kapasitas', function() {
+            return '<input type="text" name="kapasitas" /> MB'; 
+        });
+
+        $crud->callback_read_field('kapasitas', function($value) {
+            return "$value MB"; 
         });
             
-            $crud->unset_fields('nip_eslon','eslon','lokasi','cetak','nama_kpl','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas');
-            $crud->unset_columns(array('nip_eslon','eslon','lokasi','cetak','nama_kpl','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas'));
+        // $crud->unset_fields('nip_eslon','eslon','lokasi','cetak','nama_kpl','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas');
+        // $crud->unset_columns(array('nip_eslon','eslon','lokasi','cetak','nama_kpl','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas'));
             
           
-           $crud->unset_delete()->unset_edit()->unset_print()->unset_export();
-            $output = $crud->render();
-			$this->view_crud($output);
+        $crud->unset_delete()->unset_edit()->unset_print()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
 
      }
 
