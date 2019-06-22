@@ -312,58 +312,55 @@ class Crud extends CI_Controller {
         $this->view_crud($output);
 
      }
-
-     
-    
     
      public function akun_domain() {
-             $crud = new grocery_CRUD();
-			$crud->set_table('akun_domain');
-            $crud->set_subject('Penonaktifan Akun Domain');
+        $crud = new grocery_CRUD();
+        $crud->set_table('akun_domain');
+        $crud->set_subject('Penonaktifan Akun Domain');
+        $crud->fields('nama', 'nip', 'unit_kerja',
+                        'jabatan', 'alamat', 'telp', 'hp', 'email',
+                        'nama_pgw', 'nip_pgw', 'unker', 'jbtn', 'telpon',
+                        'hendphone', 'alamat_email', 'username', 'alasan');
+        $crud->display_as('kode_ad','ID');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('nip_pgw','NIP Pegawai');
+        $crud->display_as('nama_pgw','Nama Pegawai');
+        $crud->display_as('jabatan','Jabatan/Golongan');
+        $crud->display_as('jbtn','Jabatan/Golongan');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('unker','Unit Kerja');
+        $crud->display_as('telpon','Telp');
+        $crud->display_as('hendphone','Hp');
             
-               $crud->display_as('nip','NIP');
-                $crud->display_as('nip_pgw','NIP Pegawai');
-               $crud->display_as('nama_pgw','Nama Pegawai');
-               $crud->display_as('jabatan','Jabatan/Golongan');
-                $crud->display_as('jbtn','Jabatan/Golongan');
-               $crud->display_as('unit_kerja','Unit Kerja');
-               $crud->display_as('unker','Unit Kerja');
-               $crud->display_as('telpon','Telp');
-               $crud->display_as('hendphone','Hp');
             
-            
-            //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
-                $crud->callback_field('nama', function() {
-       return 'I.	Penanggung Jawab Struktural<br><input type="text" name="nama" /> '; 
+        //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
+        $crud->callback_field('nama', function($value) {
+            return '<b>I.	Penanggung Jawab Struktural</b><br><input type="text" name="nama" value="'.$value.'"/> '; 
         });
 
       
         $crud->callback_read_field('nama', function ($value, $primary_key) {
-       return 'I.	Penanggung Jawab Struktural<br> '.$value ; 
+            return '<b>I.	Penanggung Jawab Struktural</b><br> '.$value ; 
         });
-               $crud->callback_field('nama_pgw', function() {
-       return 'II.	Identitas Pegawai<br><input type="text" name="nm_pgw" /> '; 
+        $crud->callback_field('nama_pgw', function($value) {
+            return '<b>II.	Identitas Pegawai</b><br><input type="text" name="nama_pgw" value="'.$value.'"/> '; 
         });
 
         $crud->callback_read_field('nama_pgw', function($value, $primary_key) {
-       return 'II.	Identitas Pegawai<br>'.$value ; 
-        });
-            //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
-               $crud->callback_add_field('aplikasi', function() {
-       return '<input type="radio" name="aplikasi" value="Persuratan" /> Persuratan  &nbsp;
-                 <input type="radio" name="aplikasi" value="Nadine" /> Nadine &nbsp; <input type="radio" name="aplikasi" value="DAMS" /> DAMS'; 
+            return '<b>II.	Identitas Pegawai</b><br>'.$value ; 
         });
             
            
-            $crud->unset_fields('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm');
-            $crud->unset_columns(array('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
+        // $crud->unset_fields('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm');
+        // $crud->unset_columns(array('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
             
-            $crud->field_type('alasan','multiselect',array('Pensiun' => 'Pensiun', 'Meninggal' => 'Meninggal', 'Mengundurkan Diri' => 'Mengundurkan Diri', 'Lainnya' => 'Lainnya'));
+        $crud->field_type('alasan','multiselect',array('Pensiun' => 'Pensiun', 'Meninggal' => 'Meninggal', 'Mengundurkan Diri' => 'Mengundurkan Diri', 'Lainnya' => 'Lainnya'));
          
           
-           $crud->unset_delete()->unset_edit()->unset_print()->unset_export();
-            $output = $crud->render();
-			$this->view_crud($output);
+        $crud->unset_delete()->unset_edit()->unset_print()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
 
      }
 
