@@ -405,47 +405,58 @@ class Crud extends CI_Controller {
 
      }
 
-       public function pendampingan() {
-             $crud = new grocery_CRUD();
-			$crud->set_table('pendampingan');
-            $crud->set_subject('Pendampingan Video Conference');
-            
-              $crud->display_as('jenkel','Jenis Kelamin');
-              $crud->display_as('surat_elk','Alamat Surat Elektronik');
-               $crud->display_as('masa','Berlaku s.d');
-               $crud->display_as('nip_pmhn','NIP Pemohon');
-               $crud->display_as('nip','NIP');
-               $crud->display_as('usulan_akun','Nama Usulan Akun');
-               $crud->display_as('jabatan','Jabatan/Golongan');
-               $crud->display_as('unit_kerja','Unit Kerja');
-            $crud->display_as('layanan','Jenis Layanan');
+     public function pendampingan() {
+        $crud = new grocery_CRUD();
+        $crud->set_table('pendampingan');
+        $crud->set_subject('Pendampingan Video Conference');
+        $crud->columns('kode_pndm', 'is_confirm', 'nama', 'nip', 'pangkat', 
+                        'jabatan', 'unit_kerja', 'alamat', 'telp', 'hp', 'email_kemenkeu',
+                        'tanggal', 'mulai', 'selesai', 'tempat', 'agenda',
+                        'pemohon', 'nip_pmhn', 'tiket', 'diterima', 'petugas');
+        $crud->display_as('kode_pndm','ID');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('jabatan','Jabatan / Golongan');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('alamat','Alamat Kantor');
+        $crud->display_as('email_kemenkeu','Email Kemenkeu');
+        $crud->display_as('nip_pmhn','NIP Pemohon');
 
             
-            //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
-            
-            $crud->callback_add_field('mulai', function() {
-                return '<input type="time" name="mulai" >'; 
-            });
-            $crud->callback_edit_field('mulai', function() {
-                return '<input type="time" name="mulai" >'; 
-            });
+        //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
+        
+        $crud->callback_edit_field('jabatan', function($value){
+            return '<input type="text" name="jabatan" value="'.$value.'" /> <br><span style="font-size: 13px">( <i>isi dengan ... / ... </i>)</span>';
+        });
 
-            $crud->callback_add_field('selesai', function() {
-                return '<input type="time" name="selesai" >'; 
-            });
-            $crud->callback_edit_field('selesai', function() {
-                return '<input type="time" name="selesai" >'; 
-            }); 
-            
-            $crud->unset_fields('nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas');
-            $crud->unset_columns(array('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
-            
+        $crud->callback_add_field('jabatan', function($value){
+            return '<input type="text" name="jabatan" value="'.$value.'" /> <br><span style="font-size: 13px">( <i>isi dengan ... / ... </i>)</span>';
+        });
+        
+        $crud->callback_add_field('mulai', function() {
+            return '<input type="time" name="mulai" > <span style="font-size: 13px">( jam : menit : AM(pagi) / PM(malam) )</span>'; 
+        });
+        $crud->callback_edit_field('mulai', function($value) {
+            return '<input type="time" name="mulai" value="'.$value.'"> <span style="font-size: 13px">( jam : menit : detik : AM(pagi) / PM(malam) )</span>'; 
+        });
+
+
+        $crud->callback_add_field('selesai', function() {
+            return '<input type="time" name="selesai" > <span style="font-size: 13px">( jam : menit : AM(pagi) / PM(malam) )</span>'; 
+        });
+        $crud->callback_edit_field('selesai', function($value) {
+            return '<input type="time" name="selesai" value="'.$value.'"> <span style="font-size: 13px">( jam : menit : detik : AM(pagi) / PM(malam) )</span>'; 
+        }); 
+        
+        // $crud->unset_fields('nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','is_confirm','petugas');
+        // $crud->unset_columns(array('nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
+        
           
-           $crud->unset_print()->unset_export();
-            $output = $crud->render();
-			$this->view_crud($output);
+        $crud->unset_add()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
 
-          }
+     }
 
             public function akun_video() {
              $crud = new grocery_CRUD();
