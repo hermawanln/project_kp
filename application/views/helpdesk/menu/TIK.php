@@ -107,7 +107,7 @@
 	</a>
 	<ul class="treeview-menu" style="display: none;">
 		<li <?php if(isset($aplikasi)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('helpdesk/crud/app')?>'>
+			<a href='<?php echo site_url('helpdesk/crud/keg_kemenkeu')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Dukungan keg. Kemenkeu</span>
 			</a>

@@ -545,12 +545,106 @@ class Crud extends CI_Controller {
         // $crud->unset_fields('tanggal','ptgs','nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','is_confirm','hal','petugas');
         // $crud->unset_columns(array('tanggal','ptgs','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
             
-        $crud->callback_add_field('nama_akun', function($value) {
-            return '<input type="text" value="'.$value.'" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter"><br><span style="font-size: 13px">*) Untuk permintaan akun hanya dibuat saat kegiatan berlangsung dan dengan batasan waktu berdasarkan tanggal pelaksanaan</span>'; 
+        $crud->unset_add()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
+
+     }
+
+     public function keg_kemenkeu() {
+        $crud = new grocery_CRUD();
+        $crud->set_table('dukungan_kegiatan');
+        $crud->set_subject('Formulir Pemenuhan Dukungan Kegiatan KEMENKEU');
+        $crud->fields('kode_dkg',  'nama_pemohon', 'nip', 'jabatan', 'unit_kerja', 
+                        'telp', 'hp', 'alamat_surat', 'nomor_surat', 'tanggal_srt',  
+                        'jadwal_kegiatan', 'perihal', 'keterangan', 'petugas_penerima', 'nip_pnrm',
+                        'kegiatan1', 'penilaian1', 'kegiatan2', 'penilaian2', 'kegiatan3',
+                        'penilaian3', 'kegiatan4', 'penilaian4', 'kegiatan5', 'penilaian5',
+                        'lokasi', 'is_confirm' );
+        $crud->columns('kode_dkg', 'is_confirm', 'nama_pemohon', 'nip', 'jabatan', 'unit_kerja', 
+                        'telp', 'hp', 'alamat_surat', 'nomor_surat', 'tanggal_srt',  
+                        'jadwal_kegiatan', 'perihal', 'keterangan', 'petugas_penerima', 'nip_pnrm',
+                        'kegiatan1', 'penilaian1', 'kegiatan2', 'penilaian2', 'kegiatan3',
+                        'penilaian3', 'kegiatan4', 'penilaian4', 'kegiatan5', 'penilaian5',
+                        'lokasi' );
+        $crud->required_fields('kode_dkg');
+        $crud->display_as('kode_dkg','No. Form');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('nama_pemohon','Nama Pemohon');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('alamat_surat','Alamat Surat Elektronik');
+        $crud->display_as('nomor_surat','Nomor Surat Tugas');
+        $crud->display_as('tanggal_srt','Tanggal Surat Tugas');
+        $crud->display_as('tanggal_srt','Tanggal Surat Tugas');
+        $crud->display_as('jadwal_kegiatan','Jadwal Kegiatan');
+        $crud->display_as('perihal','Perihal Surat Tugas');
+        $crud->display_as('keterangan','Keterangan Tambahan');
+        $crud->display_as('petugas_penerima','Petugas Penerima');
+        $crud->display_as('nip_pnrm','NIP Penerima');
+        $crud->display_as('kegiatan1','Pemrosesan SPPD');
+        $crud->display_as('kegiatan2','Penjemputan/pengantaran pegawai/tamu ke tempat dinas yang dituju');
+        $crud->display_as('kegiatan3','Penyiapan akomodasi pegawai/tamu');
+        $crud->display_as('kegiatan4','Penyediaan perangkat dan atau data pendukung yang dibutuhkan pegawai/tamu dalam pelaksanaan dinas');
+        $crud->display_as('kegiatan5','Lain-lain');
+        $crud->display_as('penilaian1','Keterangan');
+        $crud->display_as('penilaian2','Keterangan');
+        $crud->display_as('penilaian3','Keterangan');
+        $crud->display_as('penilaian4','Keterangan');
+        $crud->display_as('penilaian5','Keterangan');
+
+            
+        $crud->callback_read_field('nama_pemohon', function($value){
+            return '<b>I.	Informasi Pemohon</b><br>'.$value.' '; 
         });
-        $crud->callback_edit_field('nama_akun', function($value) {
-            return '<input type="text" value="'.$value.'" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter"><br><span style="font-size: 13px">*) Untuk permintaan akun hanya dibuat saat kegiatan berlangsung dan dengan batasan waktu berdasarkan tanggal pelaksanaan</span>'; 
+        $crud->callback_edit_field('nama_pemohon', function($value){
+            return '<b>I.	Informasi Pemohon</b><br><input type="text" name="nama_pemohon" value="'.$value.'"/> '; 
         });
+
+        $crud->callback_read_field('nomor_surat', function($value){
+            return '<b>II.	Deskripsi Kegiatan</b><br>'.$value.' '; 
+        });
+        $crud->callback_edit_field('nomor_surat', function($value){
+            return '<b>II.	Deskripsi Kegiatan</b><br><input type="text" name="nomor_surat" value="'.$value.'"/> '; 
+        });
+
+        $crud->callback_read_field('kegiatan1', function($value){
+            return '<b>III.	Tindak Lanjut</b><br>'.$value.' '; 
+        });
+
+        $crud->callback_edit_field('kegiatan1', function($value) {
+            return '<b>III.	Tindak Lanjut</b><br><input type="radio" name="kegiatan1" value="Sangat Baik" '.($value == 'Sangat Baik' ? 'checked' : '').'/> Sangat Baik  &nbsp;
+                        <input type="radio" name="kegiatan1" value="Baik" '.($value == 'Baik' ? 'checked' : '').' /> Baik &nbsp; 
+                        <input type="radio" name="kegiatan1" value="Cukup Baik" '.($value == 'Cukup Baik' ? 'checked' : '').' /> Cukup Baik'; 
+        });
+        
+        $crud->callback_edit_field('kegiatan2', function($value) {
+            return '<input type="radio" name="kegiatan2" value="Sangat Baik" '.($value == 'Sangat Baik' ? 'checked' : '').'/> Sangat Baik  &nbsp;
+                        <input type="radio" name="kegiatan2" value="Baik" '.($value == 'Baik' ? 'checked' : '').' /> Baik &nbsp; 
+                        <input type="radio" name="kegiatan2" value="Cukup Baik" '.($value == 'Cukup Baik' ? 'checked' : '').' /> Cukup Baik'; 
+        });
+
+        $crud->callback_edit_field('kegiatan3', function($value) {
+            return '<input type="radio" name="kegiatan3" value="Sangat Baik" '.($value == 'Sangat Baik' ? 'checked' : '').'/> Sangat Baik  &nbsp;
+                        <input type="radio" name="kegiatan3" value="Baik" '.($value == 'Baik' ? 'checked' : '').' /> Baik &nbsp; 
+                        <input type="radio" name="kegiatan3" value="Cukup Baik" '.($value == 'Cukup Baik' ? 'checked' : '').' /> Cukup Baik'; 
+        });
+
+        $crud->callback_edit_field('kegiatan4', function($value) {
+            return '<input type="radio" name="kegiatan4" value="Sangat Baik" '.($value == 'Sangat Baik' ? 'checked' : '').'/> Sangat Baik  &nbsp;
+                        <input type="radio" name="kegiatan4" value="Baik" '.($value == 'Baik' ? 'checked' : '').' /> Baik &nbsp; 
+                        <input type="radio" name="kegiatan4" value="Cukup Baik" '.($value == 'Cukup Baik' ? 'checked' : '').' /> Cukup Baik'; 
+        });
+
+        $crud->callback_edit_field('kegiatan5', function($value) {
+            return '<input type="radio" name="kegiatan5" value="Sangat Baik" '.($value == 'Sangat Baik' ? 'checked' : '').'/> Sangat Baik  &nbsp;
+                        <input type="radio" name="kegiatan5" value="Baik" '.($value == 'Baik' ? 'checked' : '').' /> Baik &nbsp; 
+                        <input type="radio" name="kegiatan5" value="Cukup Baik" '.($value == 'Cukup Baik' ? 'checked' : '').' /> Cukup Baik'; 
+        });
+            
+        // $crud->unset_fields('tanggal','ptgs','nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','is_confirm','hal','petugas');
+        // $crud->unset_columns(array('tanggal','ptgs','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
+            
         $crud->unset_add()->unset_export();
         $output = $crud->render();
         $this->view_crud($output);
