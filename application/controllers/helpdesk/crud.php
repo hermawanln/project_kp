@@ -458,39 +458,43 @@ class Crud extends CI_Controller {
 
      }
 
-            public function akun_video() {
-             $crud = new grocery_CRUD();
-			$crud->set_table('akunvideo');
-            $crud->set_subject('Permintaan Akun Video Conference');
-            
-              $crud->display_as('jenkel','Jenis Kelamin');
-              $crud->display_as('surat_elk','Alamat Surat Elektronik');
-               $crud->display_as('masa','Berlaku s.d');
-               $crud->display_as('nip_pmhn','NIP Pemohon');
-               $crud->display_as('nip','NIP');
-               $crud->display_as('nama_akun','Nama Usulan Akun');
-               $crud->display_as('jabatan','Jabatan/Golongan');
-               $crud->display_as('unit_kerja','Unit Kerja');
-            $crud->display_as('layanan','Jenis Layanan');
+     public function akun_video() {
+        $crud = new grocery_CRUD();
+        $crud->set_table('akunvideo');
+        $crud->set_subject('Permintaan Akun Video Conference');
+        $crud->columns('kode_vid', 'is_confirm', 'nama', 'nip', 'pangkat',
+                        'jabatan', 'unit_kerja', 'mulai', 'selesai', 'telp',
+                        'hp', 'ket', 'email', 'nama_akun', 'lokasi',
+                        'pemohon', 'nip_pmhn', 'tiket', 'tanggal', 'ptgs' );
+        $crud->display_as('kode_vid','ID');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('jabatan','Jabatan/Golongan');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('ket','Keterangan');
+        $crud->display_as('email','Email Kemenkeu');
+        $crud->display_as('nama_akun','Usulan Nama Akun');
+        $crud->display_as('nip_pmhn','NIP Pemohon');
+        $crud->display_as('ptgs','Petugas');
 
             
-            //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
+        //  $crud->display_as('nm_pgw','<br><br><br> Nama Pegawai');
             
              
             
-            $crud->unset_fields('tanggal','ptgs','nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','is_confirm','hal','petugas');
-            $crud->unset_columns(array('tanggal','ptgs','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
+        // $crud->unset_fields('tanggal','ptgs','nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','is_confirm','hal','petugas');
+        // $crud->unset_columns(array('tanggal','ptgs','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
             
-            $crud->callback_add_field('nama_akun', function() {
-                return '<input type="text" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter">'; 
-            });
-            $crud->callback_edit_field('nama_akun', function() {
-                return '<input type="text" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter">'; 
-            });
-           $crud->unset_print()->unset_export();
-            $output = $crud->render();
-			$this->view_crud($output);
+        $crud->callback_add_field('nama_akun', function($value) {
+            return '<input type="text" value="'.$value.'" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter"><br><span style="font-size: 13px">*) Untuk permintaan akun hanya dibuat saat kegiatan berlangsung dan dengan batasan waktu berdasarkan tanggal pelaksanaan</span>'; 
+        });
+        $crud->callback_edit_field('nama_akun', function($value) {
+            return '<input type="text" value="'.$value.'" minlength="6" maxlength="20" name="nama_akun" placeholder="6 s.d. 20 karakter"><br><span style="font-size: 13px">*) Untuk permintaan akun hanya dibuat saat kegiatan berlangsung dan dengan batasan waktu berdasarkan tanggal pelaksanaan</span>'; 
+        });
+        $crud->unset_add()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
 
-          }
+     }
     
 }
