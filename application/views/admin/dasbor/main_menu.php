@@ -83,7 +83,7 @@
 	</a>
 	<ul class="treeview-menu" style="display: none;">
 		<li <?php if(isset($aplikasi)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('admin/crud/app')?>'>
+			<a href='<?php echo site_url('admin/crud/rumah_tangga')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Penemukan Layanan RT</span>
 			</a>
@@ -106,7 +106,7 @@
 	</a>
 	<ul class="treeview-menu" style="display: none;">
 		<li <?php if(isset($aplikasi)) { ?>class = "active" <?php } ?>>
-			<a href='<?php echo site_url('admin/crud/app')?>'>
+			<a href='<?php echo site_url('admin/crud/keg_kemenkeu')?>'>
 				<i class="fa fa-circle-o"></i> 
 				<span>Dukungan keg. Kemenkeu</span>
 			</a>
