@@ -452,6 +452,59 @@ class Crud extends CI_Controller {
 
      }
 
+     public function rumah_tangga() {
+        $crud = new grocery_CRUD();
+        $crud->set_table('rumahtangga');
+        $crud->set_subject('Layanan Kerumahanggaan');
+        $crud->fields('nama_pmhn', 'nip', 'jabatan', 'unit_kerja', 'telp', 
+                        'hp', 'surat_elektronik', 'deskripsi', 'nama_ptgs', 'nip_ptgs', 
+                        'rencana', 'realisasi', 'investigasi', 'solusi' );
+        $crud->display_as('kode_rmt','ID');
+        $crud->display_as('is_confirm','Status');
+        $crud->display_as('nama_pmhn','Nama Pemohon');
+        $crud->display_as('nip','NIP');
+        $crud->display_as('unit_kerja','Unit Kerja');
+        $crud->display_as('surat_elektronik','Alamat Surat Elektronik');
+        $crud->display_as('nama_ptgs','Nama Petugas');
+        $crud->display_as('nip_ptgs','NIP Petugas');
+        $crud->display_as('rencana','Rencana Penyediaan/Perbaikan');
+        $crud->display_as('realisasi','Realisasi Penyediaan/Perbaikan');
+        $crud->display_as('investigasi','Hasil Investigasi');
+        $crud->display_as('solusi','Solusi yang Diberikan');
+        $crud->display_as('petugas_kptik','Nama Petugas KPTIKBMN');
+        $crud->display_as('nip_kptik','NIP Petugas KPTIKBMN');
+
+            
+        $crud->callback_read_field('nama_pmhn', function($value){
+            return '<b>I.	Informasi Pemohon</b><br>'.$value.''; 
+        });
+        $crud->callback_add_field('nama_pmhn', function($value){
+            return '<b>I.	Informasi Pemohon</b><br><input type="text" name="nama_pmhn" value="'.$value.'"/> '; 
+        });
+
+        $crud->callback_read_field('deskripsi', function($value){
+            return '<b>II.	Deskripsi Penyediaan/Perbaikan Sarana Prasarana Gedung</b><br>'.$value.''; 
+        });
+        $crud->callback_add_field('deskripsi', function($value){
+            return '<b>II.	Deskripsi Penyediaan/Perbaikan Sarana Prasarana Gedung</b><br><textarea name="deskripsi" value="'.$value.'"/></textarea> '; 
+        });
+
+        $crud->callback_read_field('nama_ptgs', function($value){
+            return '<b>III.	Tindak Lanjut</b><br>'.$value.' '; 
+        });
+        $crud->callback_add_field('nama_ptgs', function($value){
+            return '<b>III.	Tindak Lanjut</b><br><input type="text" name="nama_ptgs" value="'.$value.'"/>'; 
+        });
+            
+        // $crud->unset_fields('tanggal','ptgs','nip_pmhn','pemohon','diterima','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','is_confirm','hal','petugas');
+        // $crud->unset_columns(array('tanggal','ptgs','nip_eslon','eslon','lokasi','cetak','nm_kepala','tiket','nip_kpl','dibuat','nomor','nm_kpl','oleh','kepala','hal','petugas','is_confirm'));
+        
+        $crud->unset_delete()->unset_edit()->unset_print()->unset_export();
+        $output = $crud->render();
+        $this->view_crud($output);
+
+     }
+
         
     
 }
