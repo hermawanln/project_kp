@@ -114,7 +114,7 @@
 	</ul>
 </li>
 
-<li class="treeview">
+<!-- <li class="treeview">
 	<a href="#">
 		<i class="fa fa-cog"></i> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span><span>PDF</span> 
 	</a>
@@ -126,7 +126,7 @@
 			</a>
 		</li>
 	</ul>
-</li>
+</li> -->
 	
 
 <li class="treeview">
